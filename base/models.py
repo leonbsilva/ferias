@@ -21,6 +21,7 @@ def post_save_custom_user(sender, instance, **kwargs):
 
 class CustomUser(AbstractUser):
     matricula = models.CharField(verbose_name='Matrícula', max_length=30, null=True)
+    data_admissao = models.DateField(blank=True, null=True)
 
 
 pre_save.connect(pre_save_custom_user, sender=CustomUser)
