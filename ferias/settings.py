@@ -33,13 +33,13 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'admin_interface',
     'colorfield',
+    'base',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base'
 ]
 
 MIDDLEWARE = [
@@ -133,3 +133,4 @@ USE_L10N = True
 USE_TZ = False
 DECIMAL_SEPARATOR = ','
 USE_THOUSAND_SEPARATOR = True
+AUTH_USER_MODEL = "base.CustomUser"
