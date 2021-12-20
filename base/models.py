@@ -1,4 +1,4 @@
-from datetime import date
+import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import Group
@@ -39,8 +39,8 @@ class Vacancia(models.Model):
     avaliador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='avaliacoes')
     data_inicio = models.DateField(null=False)
     data_fim = models.DateField(null=False)
-    data_avaliacao = models.DateField(null=True)
-    data_solicitacao = models.DateField()
+    data_avaliacao = models.DateTimeField(null=True)
+    data_solicitacao = models.DateTimeField()
     ano_base = models.IntegerField(null=False)
     observacao = models.CharField(null=True, max_length=255)
     situacao = models.CharField(null=False, max_length=255)
@@ -51,6 +51,6 @@ class Vacancia(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-            self.data_solicitacao = date.today()
+            self.data_solicitacao = datetime.datetime.now()
             self.situacao = 'Aguardando avaliação'
         super().save(*args, **kwargs)
