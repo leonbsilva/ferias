@@ -15,7 +15,7 @@ def adicionar_usuario(request):
 
 
 def listagem_ferias(request):
-    vacancias = Vacancia.objects.filter(servidor=request.user)
+    vacancias = Vacancia.objects.filter(servidor=request.user).order_by("data_solicitacao")
     return render(request, 'listagem_ferias.html', dict(vacancias=vacancias))
 
 
