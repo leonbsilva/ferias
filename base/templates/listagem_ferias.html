@@ -2,22 +2,36 @@
 
 {% block content %}
     <h1>Solicitações de Férias {{request.user}}</h1>
-    <table>
+    {% if perms.base.add_vacancia and not request.user.is_superuser %}
+    <ul class="object-tools">
+      <li>
+          <a href="/base/adicionar_ferias/" class="addlink">Adicionar Férias</a>
+      </li>
+    </ul>
+    {% endif %}
+    <table width="100%">
         <tr>
-            <th>ID</th>
+            <th>SITUAÇÃO</th>
+            <th>ANO BASE</th>
             <th>DATA INÍCIO</th>
             <th>DATA FIM</th>
-            <th>ANO BASE</th>
-            <th>SITUACAO</th>
+            <th>DATA SOLICITAÇÃO</th>
+            <th>DATA AVALIAÇÃO</th>
+            <th>OBSERVAÇÃO</th>
         </tr>
         {% for vacancia in vacancias %}
         <tr>
             <td>
-               {{ vacancia.id }}
+               {{ vacancia.situacao }}
             </td>
+            <td>{{ vacancia.ano_base }}</td>
             <td>{{ vacancia.data_inicio }}</td>
             <td>{{ vacancia.data_fim }}</td>
-            <td>{{ vacancia.ano_base }}</td>
+            <td>{{ vacancia.data_solicitacao }}</td>
+            <td>{{ vacancia.data_avaliacao }}</td>
+            <td>{{ vacancia.observacao }}</td>
+
+
             <td></td>
         </tr>
         {% endfor %}

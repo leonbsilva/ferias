@@ -27,7 +27,7 @@ class CustomUser(AbstractUser):
     data_admissao = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return self.username + ' (' + self.matricula + ')'
+        return self.username + ' (' + (self.matricula or '') + ')'
 
 
 pre_save.connect(pre_save_custom_user, sender=CustomUser)

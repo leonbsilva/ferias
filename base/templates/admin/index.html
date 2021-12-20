@@ -8,9 +8,9 @@
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
  
 {% block breadcrumbs %}{% endblock %}
- 
+
 {% block nav-sidebar %}{% endblock %}
- 
+
 {% block content %}
 <div id="content-main">
   {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
@@ -21,7 +21,13 @@
 <div id="content-related">
     <div class="module" id="recent-actions-module">
         <h2>Atalhos</h2>
+        {% if perms.auth.add_user %}
         <p><a href="/base/adicionar_usuario/">Cadastrar Usuário</a></p>
+        {% endif %}
+        {% if perms.base.view_vacancia and not request.user.is_superuser %}
+        <p><a href="/base/listagem_ferias/">Férias</a></p>
+        {% endif %}
+
         <h2>{% translate 'Recent actions' %}</h2>
         <h3>{% translate 'My actions' %}</h3>
             {% load log %}

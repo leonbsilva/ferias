@@ -6,11 +6,15 @@ from .models import CustomUser, Vacancia
 
 
 class CustomUserAdmin(UserAdmin):
-    pass
+    def has_add_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(Vacancia)
 class VacanciaAdmin(admin.ModelAdmin):
+    list_display = ['situacao', 'observacao', 'data_solicitacao', 'ano_base', 'data_inicio', 'data_fim',
+                    'data_avaliacao', 'observacao']
+
     def has_add_permission(self, request, obj=None):
         return False
 

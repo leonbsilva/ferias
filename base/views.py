@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from base.forms import AdicionarUsuarioForm
+from base.forms import AdicionarUsuarioForm, AdicionarFeriasForm
 from base.models import Vacancia
 
 
@@ -17,3 +17,13 @@ def adicionar_usuario(request):
 def listagem_ferias(request):
     vacancias = Vacancia.objects.filter(servidor=request.user)
     return render(request, 'listagem_ferias.html', dict(vacancias=vacancias))
+
+
+def adicionar_ferias(request):
+    form = AdicionarFeriasForm(data=request.POST or None)
+    if form.is_valid():
+        ferias = form.save(commit=False)
+        ferias.servidor = request.user
+        ferias.save()
+        return HttpResponseRedirect('/base/listagem_ferias/')
+    return render(request, 'adicionar_ferias.html', dict(form=form))

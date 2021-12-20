@@ -13,10 +13,11 @@ class AdicionarUsuarioForm(forms.ModelForm):
 
 
 class AdicionarFeriasForm(forms.ModelForm):
-    class Meta:
-        model = Vacancia
-        fields = ['ano_base']
-
     data_inicio = forms.DateField(label='Início', widget=NumberInput(attrs={'type': 'date'}), required=True)
     data_fim = forms.DateField(label='Fim', widget=NumberInput(attrs={'type': 'date'}), required=True)
+
+    class Meta:
+        model = Vacancia
+        fields = ['ano_base', 'data_inicio', 'data_fim']
+
 
