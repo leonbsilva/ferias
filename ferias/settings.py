@@ -134,3 +134,25 @@ USE_TZ = False
 DECIMAL_SEPARATOR = ','
 USE_THOUSAND_SEPARATOR = True
 AUTH_USER_MODEL = "base.CustomUser"
+
+LOGGING = {
+    'version': 1,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
+    }
+}

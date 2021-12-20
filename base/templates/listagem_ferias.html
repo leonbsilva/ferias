@@ -1,0 +1,25 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+    <h1>Solicitações de Férias {{request.user}}</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>DATA INÍCIO</th>
+            <th>DATA FIM</th>
+            <th>ANO BASE</th>
+            <th>SITUACAO</th>
+        </tr>
+        {% for vacancia in vacancias %}
+        <tr>
+            <td>
+               {{ vacancia.id }}
+            </td>
+            <td>{{ vacancia.data_inicio }}</td>
+            <td>{{ vacancia.data_fim }}</td>
+            <td>{{ vacancia.ano_base }}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
