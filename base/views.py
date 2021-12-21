@@ -1,8 +1,11 @@
+import datetime
+
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
-from base.forms import AdicionarUsuarioForm, AdicionarFeriasForm
+from base.forms import AdicionarUsuarioForm, AdicionarFeriasForm, RevisarFeriasForm, ListagemRevisaoFeriasForm, \
+    ListagemFeriasForm
 from base.models import Vacancia
 
 
@@ -15,8 +18,10 @@ def adicionar_usuario(request):
 
 
 def listagem_ferias(request):
-    vacancias = Vacancia.objects.filter(servidor=request.user).order_by("data_solicitacao")
-    return render(request, 'listagem_ferias.html', dict(vacancias=vacancias))
+    form = ListagemFeriasForm(data=request.POST or None)
+
+    vacancias = form.search(user=request.user)
+    return render(request, 'listagem_ferias.html', dict(vacancias=vacancias, form=form))
 
 
 def adicionar_ferias(request):
@@ -27,3 +32,23 @@ def adicionar_ferias(request):
         ferias.save()
         return HttpResponseRedirect('/base/listagem_ferias/')
     return render(request, 'adicionar_ferias.html', dict(form=form))
+
+
+def listagem_revisao_ferias(request):
+    form = ListagemRevisaoFeriasForm(data=request.POST or None)
+
+    vacancias = form.search(user=request.user)
+    return render(request, 'listagem_revisao_ferias.html', dict(vacancias=vacancias, form=form))
+
+
+def revisar_ferias(request, vacation_id):
+    form = RevisarFeriasForm(data=request.POST or None)
+    ferias = get_object_or_404(Vacancia, pk=vacation_id)
+    if form.is_valid():
+        ferias.avaliador = request.user
+        ferias.observacao = form.cleaned_data['observacao']
+        ferias.situacao = form.cleaned_data['situacao']
+        ferias.data_avaliacao = datetime.datetime.now()
+        ferias.save()
+        return HttpResponseRedirect('/base/listagem_revisao_ferias')
+    return render(request, 'revisar_ferias.html', dict(form=form))

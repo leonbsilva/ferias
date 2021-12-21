@@ -54,3 +54,7 @@ class Vacancia(models.Model):
             self.data_solicitacao = datetime.datetime.now()
             self.situacao = 'Aguardando avaliação'
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.servidor.__str__() + ' - ' + self.data_inicio.strftime('%d/%m/%Y') + ' a ' +\
+               self.data_fim.strftime('%d/%m/%Y')

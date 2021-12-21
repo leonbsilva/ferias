@@ -12,8 +12,9 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Vacancia)
 class VacanciaAdmin(admin.ModelAdmin):
-    list_display = ['situacao', 'observacao', 'data_solicitacao', 'ano_base', 'data_inicio', 'data_fim',
+    list_display = ['servidor', 'situacao', 'data_solicitacao', 'ano_base', 'data_inicio', 'data_fim',
                     'data_avaliacao', 'observacao']
+    search_fields = ['servidor__username']
 
     def has_add_permission(self, request, obj=None):
         return False

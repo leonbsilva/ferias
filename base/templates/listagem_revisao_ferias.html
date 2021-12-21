@@ -1,31 +1,26 @@
 {% extends "admin/base_site.html" %}
 
 {% block content %}
-    <h1>Solicitações de Férias {{request.user}}</h1>
-    {% if perms.base.add_vacancia and not request.user.is_superuser %}
-    <ul class="object-tools">
-      <li>
-          <a href="/base/adicionar_ferias/" class="addlink">Adicionar Férias</a>
-      </li>
-    </ul>
-    {% endif %}
+    <h1>Férias Aguardando Revisão</h1>
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Pesquisar"/>
+        <input type="submit" name="pesquisar" value="Pesquisar"/>
     </form>
+    <table>
     <table width="100%">
         <tr>
+            <th>SERVIDOR</th>
             <th>SITUAÇÃO</th>
             <th>ANO BASE</th>
             <th>DATA INÍCIO</th>
             <th>DATA FIM</th>
             <th>DATA SOLICITAÇÃO</th>
-            <th>DATA AVALIAÇÃO</th>
-            <th>OBSERVAÇÃO</th>
+            <th></th>
         </tr>
         {% for vacancia in vacancias %}
         <tr>
+            <td><a href="/admin/base/vacancia/{{ vacancia.id }}/change">{{ vacancia.servidor }}</a></td>
             <td>
                {{ vacancia.situacao }}
             </td>
@@ -33,11 +28,7 @@
             <td>{{ vacancia.data_inicio }}</td>
             <td>{{ vacancia.data_fim }}</td>
             <td>{{ vacancia.data_solicitacao }}</td>
-            <td>{{ vacancia.data_avaliacao }}</td>
-            <td>{{ vacancia.observacao }}</td>
-
-
-            <td></td>
+            <td><a href="/base/ferias/{{ vacancia.id }}/edit">REVISAR</a></td>
         </tr>
         {% endfor %}
     </table>

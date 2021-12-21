@@ -1,5 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
+
+{% load helper %}
  
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
  
@@ -25,7 +27,10 @@
         <p><a href="/base/adicionar_usuario/">Cadastrar Usuário</a></p>
         {% endif %}
         {% if perms.base.view_vacancia and not request.user.is_superuser %}
-        <p><a href="/base/listagem_ferias/">Férias</a></p>
+        <p><a href="/base/listagem_ferias/">Férias solicitadas</a></p>
+        {% endif %}
+        {% if request.user|has_group:"Avaliador" %}
+        <p><a href="/base/listagem_revisao_ferias/">Revisar Férias</a></p>
         {% endif %}
 
         <h2>{% translate 'Recent actions' %}</h2>
