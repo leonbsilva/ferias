@@ -23,11 +23,12 @@ def post_save_custom_user(sender, instance, **kwargs):
 
 
 class CustomUser(AbstractUser):
-    matricula = models.CharField(verbose_name='Matrícula', max_length=30, null=True)
-    data_admissao = models.DateField(blank=True, null=True)
+    matricula = models.CharField(verbose_name='Matrícula', max_length=30, null=False, unique=True)
+    data_admissao = models.DateField(blank=False, null=False)
+    REQUIRED_FIELDS = ['matricula', 'data_admissao']
 
     def __str__(self):
-        return self.username + ' (' + (self.matricula or '') + ')'
+        return self.first_name + ' (' + (self.matricula or '') + ')'
 
 
 pre_save.connect(pre_save_custom_user, sender=CustomUser)
