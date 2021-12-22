@@ -7,7 +7,7 @@ from base.models import CustomUser, Vacancia
 class AdicionarUsuarioForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'matricula']
+        fields = ['username', 'first_name', 'last_name', 'matricula']
 
     data_admissao = forms.DateField(label='Data Admissão', widget=NumberInput(attrs={'type': 'date'}), required=True)
 
