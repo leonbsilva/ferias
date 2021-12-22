@@ -26,7 +26,7 @@
         {% if perms.auth.add_user %}
         <p><a href="/base/adicionar_usuario/">Cadastrar Usuário</a></p>
         {% endif %}
-        {% if perms.base.view_vacancia and not request.user.is_superuser %}
+        {% if perms.base.view_vacancia %}
         <p><a href="/base/listagem_ferias/">Férias solicitadas</a></p>
         {% endif %}
         {% if request.user|has_group:"Avaliador" %}

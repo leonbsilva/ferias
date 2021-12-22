@@ -1,7 +1,7 @@
 {% extends "admin/base_site.html" %}
 
 {% block content %}
-    <h1>Férias Aguardando Revisão</h1>
+    <h1>Revisão de Férias</h1>
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -28,7 +28,11 @@
             <td>{{ vacancia.data_inicio }}</td>
             <td>{{ vacancia.data_fim }}</td>
             <td>{{ vacancia.data_solicitacao }}</td>
-            <td><a href="/base/ferias/{{ vacancia.id }}/edit">REVISAR</a></td>
+            <td>
+                {% if vacancia.situacao == 'Aguardando avaliação' %}
+                    <a href="/base/ferias/{{ vacancia.id }}/edit">REVISAR</a>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </table>

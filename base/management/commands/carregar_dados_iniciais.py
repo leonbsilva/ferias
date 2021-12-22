@@ -10,7 +10,5 @@ class Command(BaseCommand):
         permission2 = Permission.objects.get(codename='view_vacancia')
         grupo_servidor[0].permissions.add(permission1)
         grupo_servidor[0].permissions.add(permission2)
-        grupo_avaliador = Group.objects.get_or_create(name='Avaliador')
-        grupo_avaliador[0].permissions.add(permission1)
-        grupo_avaliador[0].permissions.add(permission2)
+        Group.objects.get_or_create(name='Avaliador')
         print('FEITO!')
