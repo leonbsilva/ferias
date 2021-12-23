@@ -43,7 +43,7 @@ class Vacancia(models.Model):
     data_avaliacao = models.DateTimeField(null=True)
     data_solicitacao = models.DateTimeField()
     ano_base = models.IntegerField(null=False)
-    observacao = models.CharField(null=True, max_length=255)
+    observacao = models.TextField(null=True, max_length=255)
     situacao = models.CharField(null=False, max_length=255)
 
     class Meta:

@@ -78,7 +78,7 @@ class RevisarFeriasForm(forms.ModelForm):
         ('Deferido', 'Deferido'),
         ('Indeferido', 'Indeferido'),
     ])
-    observacao = forms.CharField(label='Observação', required=False)
+    observacao = forms.CharField(label='Observação', required=False, widget=forms.Textarea)
 
     class Meta:
         model = Vacancia

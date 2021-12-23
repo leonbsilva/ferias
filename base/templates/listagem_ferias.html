@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Férias solicitadas pelo {{request.user}}</h1>
-    {% if perms.base.add_vacancia and not request.user.is_superuser %}
+    {% if perms.base.add_vacancia or request.user.is_superuser %}
     <ul class="object-tools">
       <li>
           <a href="/base/adicionar_ferias/" class="addlink">Adicionar Férias</a>
@@ -33,8 +33,8 @@
             <td>{{ vacancia.data_inicio }}</td>
             <td>{{ vacancia.data_fim }}</td>
             <td>{{ vacancia.data_solicitacao }}</td>
-            <td>{{ vacancia.data_avaliacao }}</td>
-            <td>{{ vacancia.observacao }}</td>
+            <td>{{ vacancia.data_avaliacao|default:"-" }}</td>
+            <td>{{ vacancia.observacao|default:"-" }}</td>
 
 
             <td></td>
