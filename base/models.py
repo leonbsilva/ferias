@@ -12,7 +12,7 @@ from django.contrib.auth.models import AbstractUser
 def pre_save_custom_user(sender, instance, **kwargs):
     if not instance.is_staff:
         instance.is_staff = True
-        if not instance.pk:
+        if not instance.pk and not instance.password:
             instance.set_password('123')
 
 

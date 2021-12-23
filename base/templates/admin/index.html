@@ -23,14 +23,11 @@
 <div id="content-related">
     <div class="module" id="recent-actions-module">
         <h2>Atalhos</h2>
-        {% if perms.auth.add_user %}
-        <p><a href="/base/adicionar_usuario/">Cadastrar Usuário</a></p>
-        {% endif %}
         {% if perms.base.view_vacancia %}
-        <p><a href="/base/listagem_ferias/">Férias solicitadas</a></p>
+        <p><a href="/base/listagem_ferias/">Férias</a></p>
         {% endif %}
         {% if request.user|has_group:"Avaliador" %}
-        <p><a href="/base/listagem_revisao_ferias/">Revisar Férias</a></p>
+        <p><a href="/base/listagem_revisao_ferias/">Gerenciamento de Férias</a></p>
         {% endif %}
 
         <h2>{% translate 'Recent actions' %}</h2>

@@ -4,6 +4,16 @@ from django.forms import NumberInput
 from base.models import CustomUser, Vacancia
 
 
+class CustomUserChangeForm(forms.ModelForm):
+    data_admissao = forms.DateField(label='Data Admissão', widget=NumberInput(attrs={'type': 'date'}),
+                                    required=True)
+
+    matricula = forms.CharField(label="Matrícula", max_length=75, required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserChangeForm, self).__init__(*args, **kwargs)
+
+
 class AdicionarUsuarioForm(forms.ModelForm):
     class Meta:
         model = CustomUser
