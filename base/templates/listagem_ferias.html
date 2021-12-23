@@ -1,7 +1,7 @@
 {% extends "admin/base_site.html" %}
 
 {% block content %}
-    <h1>Férias solicitadas pelo {{request.user}}</h1>
+    <h1>Férias solicitadas por {{request.user}}</h1>
     {% if perms.base.add_vacancia or request.user.is_superuser %}
     <ul class="object-tools">
       <li>

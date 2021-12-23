@@ -24,8 +24,8 @@ def post_save_custom_user(sender, instance, **kwargs):
 
 class CustomUser(AbstractUser):
     matricula = models.CharField(verbose_name='Matrícula', max_length=30, null=False, unique=True)
-    data_admissao = models.DateField(blank=False, null=False)
-    REQUIRED_FIELDS = ['matricula', 'data_admissao']
+    data_admissao = models.DateField(verbose_name='Data de Admissão', blank=False, null=False)
+    REQUIRED_FIELDS = ['matricula', 'data_admissao', 'first_name']
 
     def __str__(self):
         return self.first_name + ' (' + (self.matricula or '') + ')'
@@ -38,13 +38,13 @@ post_save.connect(post_save_custom_user, sender=CustomUser)
 class Vacancia(models.Model):
     servidor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='vacancias')
     avaliador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='avaliacoes')
-    data_inicio = models.DateField(null=False)
-    data_fim = models.DateField(null=False)
-    data_avaliacao = models.DateTimeField(null=True)
+    data_inicio = models.DateField(verbose_name='Data Inicial', null=False)
+    data_fim = models.DateField(verbose_name='Data Final', null=False)
+    data_avaliacao = models.DateTimeField(verbose_name='Data da Avaliação', null=True)
     data_solicitacao = models.DateTimeField()
-    ano_base = models.IntegerField(null=False)
-    observacao = models.TextField(null=True, max_length=255)
-    situacao = models.CharField(null=False, max_length=255)
+    ano_base = models.IntegerField(verbose_name='Ano Base', null=False)
+    observacao = models.TextField(verbose_name='Observação', null=True, max_length=255)
+    situacao = models.CharField(verbose_name='Situação', null=False, max_length=255)
 
     class Meta:
         verbose_name = "Férias"

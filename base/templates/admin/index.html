@@ -22,9 +22,9 @@
 {% block sidebar %}
 <div id="content-related">
     <div class="module" id="recent-actions-module">
-        <h2>Atalhos</h2>
+        <h2>Formulários</h2>
         {% if perms.base.view_vacancia %}
-        <p><a href="/base/listagem_ferias/">Férias</a></p>
+        <p><a href="/base/listagem_ferias/">Minhas Férias</a></p>
         {% endif %}
         {% if request.user|has_group:"Avaliador" %}
         <p><a href="/base/listagem_revisao_ferias/">Gerenciamento de Férias</a></p>
